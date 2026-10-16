@@ -1,7 +1,7 @@
 export default function TaxTip({ taxTip, onChange }) {
   return (
     <section className="section">
-      <h2>Tax &amp; tip</h2>
+      <h2>Tax &amp; <span className="accent-word">tip</span></h2>
       <p className="muted">Shared proportionally -- whoever ordered more pays a bit more of it.</p>
       <div className="grid">
         <label>

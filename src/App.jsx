@@ -42,7 +42,7 @@ export default function App() {
   return (
     <main className="app">
       <header>
-        <h1>Bill Splitter</h1>
+        <h1>Bill <span className="accent-word">Splitter</span></h1>
         <p className="subhead">Split a shared bill fairly, item by item.</p>
       </header>
 
@@ -52,7 +52,7 @@ export default function App() {
         <>
           <ItemForm people={people} onAdd={addItem} />
           <section className="section">
-            <h2>Items</h2>
+            <h2 className="accent-word">Items</h2>
             <ItemsList items={items} people={people} onRemove={removeItem} />
           </section>
           <TaxTip taxTip={taxTip} onChange={setTaxTip} />

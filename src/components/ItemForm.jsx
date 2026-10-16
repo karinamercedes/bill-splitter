@@ -31,7 +31,7 @@ export default function ItemForm({ people, onAdd }) {
 
   return (
     <form className="section" onSubmit={handleSubmit}>
-      <h2>Add an item</h2>
+      <h2>Add an <span className="accent-word">item</span></h2>
       <div className="grid">
         <label className="wide">
           Item
@@ -90,7 +90,7 @@ export default function ItemForm({ people, onAdd }) {
         </>
       )}
 
-      <button type="submit" className="primary" disabled={people.length === 0}>Add item</button>
+      <button type="submit" className="primary full-width" disabled={people.length === 0}>Add item</button>
     </form>
   )
 }
