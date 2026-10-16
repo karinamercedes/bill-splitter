@@ -108,6 +108,22 @@ input, select {
 select option { background: var(--bg); color: var(--text); }
 input::placeholder { color: #8fabbd; }
 
+/* Same Safari-specific reservation on the other side: a number input's
+   native up/down spin button also claims a sliver of height Safari doesn't
+   give back even once it's visually tiny, which is what was still leaving
+   Price a couple of pixels taller than Split after the select fix above.
+   Removing it (nobody taps tiny arrows to set a bill amount anyway) gets
+   Price down to the exact same box. */
+input[type="number"] {
+  -webkit-appearance: none;
+  -moz-appearance: textfield;
+}
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 /* Safari renders a <select>'s native box a touch taller than a same-padding
    <input> -- it reserves its own internal space for the dropdown arrow, so
    this shows up in Safari's own inspector too, not only on a real device.
