@@ -108,6 +108,23 @@ input, select {
 select option { background: var(--bg); color: var(--text); }
 input::placeholder { color: #8fabbd; }
 
+/* Safari renders a <select>'s native box a touch taller than a same-padding
+   <input> -- it reserves its own internal space for the dropdown arrow, so
+   this shows up in Safari's own inspector too, not only on a real device.
+   Stripping the native appearance and drawing a plain chevron in its place
+   makes Price and Split match exactly, in both height and look. */
+select {
+  -webkit-appearance: none;
+  appearance: none;
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--muted) 50%),
+    linear-gradient(135deg, var(--muted) 50%, transparent 50%);
+  background-position: calc(100% - 21px) center, calc(100% - 16px) center;
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+  padding-right: 40px;
+}
+
 input:focus, select:focus, button:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
@@ -166,17 +183,27 @@ button.primary:hover {
   margin-bottom: 25px;
 }
 .chip { width: 100%; border-radius: 999px; padding: 11px 20px; font-size: 1rem; text-align: center; }
-.chip-on {
+
+/* Unselected chip: on hover it fills solid, the same "whole accent colour"
+   treatment as the Add/Add item CTAs -- a clear tap-to-add signal. */
+.chip:not(.chip-on):hover {
   background: var(--accent);
   border-color: var(--accent);
   color: var(--accent-text);
+}
+
+/* Selected chip: rim and label in the accent colour on a transparent
+   background, rather than a full solid fill -- reads lighter once several
+   people are selected. Hovering a selected chip keeps exactly this look;
+   it's already showing its selected state, so there's nothing to invert to
+   the way the unselected chip above does. */
+.chip-on,
+.chip-on:hover {
+  background: transparent;
+  border-color: var(--accent);
+  color: var(--accent);
   font-weight: 600;
 }
-/* A selected chip keeps its solid fill and dark label on hover — the
-   generic button:hover above would otherwise turn its text the same
-   accent colour as its own already-accent background, making it
-   unreadable. */
-.chip-on:hover { color: var(--accent-text); }
 
 /* A CTA that should take the full width of its container (the "Add item"
    submit button sits below the full-width chips grid above). */

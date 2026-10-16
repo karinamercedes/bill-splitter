@@ -48,16 +48,14 @@ export default function App() {
 
       <PeopleForm people={people} onAdd={addPerson} onRemove={removePerson} />
 
-      {people.length > 0 && (
-        <>
-          <ItemForm people={people} onAdd={addItem} />
-          <section className="section">
-            <h2 className="accent-word">Items</h2>
-            <ItemsList items={items} people={people} onRemove={removeItem} />
-          </section>
-          <TaxTip taxTip={taxTip} onChange={setTaxTip} />
-        </>
-      )}
+      {/* Items can be entered before anyone's added to split them -- Shared
+          by just won't have any names to show until People has some. */}
+      <ItemForm people={people} onAdd={addItem} />
+      <section className="section">
+        <h2 className="accent-word">Items</h2>
+        <ItemsList items={items} people={people} onRemove={removeItem} />
+      </section>
+      <TaxTip taxTip={taxTip} onChange={setTaxTip} />
 
       <div className="plan-controls">
         <button type="button" className="link-reset" onClick={resetAll}>Reset</button>

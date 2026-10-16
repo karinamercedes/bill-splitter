@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 const empty = (people) => ({
   name: '', price: '', splitType: 'equal',
@@ -8,6 +8,15 @@ const empty = (people) => ({
 
 export default function ItemForm({ people, onAdd }) {
   const [item, setItem] = useState(() => empty(people))
+
+  // This form can now mount before anyone's been added (Shared by starts
+  // out empty, since there's nobody to default to yet). Once people does
+  // get added, keep "everyone" as the default for as long as this item
+  // hasn't been started -- without this, a form that mounted empty would
+  // never pick up the people added after it.
+  useEffect(() => {
+    setItem((prev) => (prev.name ? prev : { ...prev, sharedBy: people.map((p) => p.id) }))
+  }, [people])
 
   function toggleShared(id) {
     const sharedBy = item.sharedBy.includes(id)
@@ -90,7 +99,7 @@ export default function ItemForm({ people, onAdd }) {
         </>
       )}
 
-      <button type="submit" className="primary full-width" disabled={people.length === 0}>Add item</button>
+      <button type="submit" className="primary full-width">Add item</button>
     </form>
   )
 }
