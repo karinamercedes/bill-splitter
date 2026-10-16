@@ -1,3 +1,5 @@
+import TrashIcon from './TrashIcon'
+
 export default function ItemsList({ items, people, onRemove }) {
   if (items.length === 0) return <p className="empty">No items yet. Add your first one above.</p>
   const byId = new Map(people.map((p) => [p.id, p.name]))
@@ -15,7 +17,9 @@ export default function ItemsList({ items, people, onRemove }) {
                 : 'custom split'}
             </span>
           </div>
-          <button type="button" onClick={() => onRemove(item.id)} aria-label={`Remove ${item.name}`}>Remove</button>
+          <button type="button" className="icon-button" onClick={() => onRemove(item.id)} aria-label={`Remove ${item.name}`}>
+            <TrashIcon />
+          </button>
         </li>
       ))}
     </ul>

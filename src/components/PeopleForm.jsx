@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import TrashIcon from './TrashIcon'
 
 export default function PeopleForm({ people, onAdd, onRemove }) {
   const [name, setName] = useState('')
@@ -23,7 +24,9 @@ export default function PeopleForm({ people, onAdd, onRemove }) {
           {people.map((p) => (
             <li key={p.id}>
               <span>{p.name}</span>
-              <button type="button" className="link-reset" onClick={() => onRemove(p.id)}>Remove</button>
+              <button type="button" className="icon-button" onClick={() => onRemove(p.id)} aria-label={`Remove ${p.name}`}>
+                <TrashIcon />
+              </button>
             </li>
           ))}
         </ul>

@@ -198,27 +198,48 @@ button.primary:hover {
   gap: 12px;
   margin-bottom: 25px;
 }
-.chip { width: 100%; border-radius: 999px; padding: 11px 20px; font-size: 1rem; text-align: center; }
-
-/* Unselected chip: on hover it fills solid, the same "whole accent colour"
-   treatment as the Add/Add item CTAs -- a clear tap-to-add signal. */
-.chip:not(.chip-on):hover {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: var(--accent-text);
+/* Exactly two states, full stop -- no separate hover look to get stuck in
+   on a touch device (tapping a chip on mobile used to leave it stuck
+   showing its :hover style, which could look identical to -- or fight
+   with -- its actual selected/unselected state).
+   Unselected (default): solid teal fill, white label.
+   Selected (.chip-on): transparent fill, gold rim and label. */
+.chip {
+  width: 100%; border-radius: 999px; padding: 11px 20px; font-size: 1rem; text-align: center;
+  background: var(--teal); border-color: var(--teal); color: var(--text);
 }
-
-/* Selected chip: rim and label in the accent colour on a transparent
-   background, rather than a full solid fill -- reads lighter once several
-   people are selected. Hovering a selected chip keeps exactly this look;
-   it's already showing its selected state, so there's nothing to invert to
-   the way the unselected chip above does. */
-.chip-on,
-.chip-on:hover {
+.chip-on {
   background: transparent;
   border-color: var(--accent);
   color: var(--accent);
   font-weight: 600;
+}
+/* A chip is still a <button>, so the generic button:hover rule further
+   down (border/text to gold on :hover) would otherwise apply here too --
+   and a touch tap can leave an element matching :hover well after the
+   finger lifts, even on a screen that fails the (hover: hover) media
+   check below. These two reassert each state's own resting colours on
+   :hover itself (not gated by any media query, and winning the cascade
+   over the plain button:hover rule on specificity alone), so a tapped
+   chip can't get stuck showing a colour that belongs to neither state. */
+.chip:hover { border-color: var(--teal); color: var(--text); }
+.chip-on:hover { border-color: var(--accent); color: var(--accent); }
+
+/* A hover cue is fine, but only for a pointer that can actually hover
+   without getting stuck there -- a real mouse/trackpad, not a touchscreen
+   (where tapping would otherwise leave the chip showing this style after
+   the finger lifts, which is exactly what went wrong before). */
+@media (hover: hover) and (pointer: fine) {
+  .chip:not(.chip-on):hover {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--accent-text);
+  }
+  .chip-on:hover {
+    background: transparent;
+    border-color: var(--accent);
+    color: var(--accent);
+  }
 }
 
 /* A CTA that should take the full width of its container (the "Add item"
@@ -244,6 +265,17 @@ button.primary:hover {
   text-underline-offset: 4px;
 }
 .link-reset:hover { color: var(--accent); border: none; }
+
+/* Icon-only "remove" buttons (people, items) -- same pattern as
+   travel-planner's own delete icon: no border/background of its own,
+   sized to the icon, coloured gold, with a soft gold hover fill instead
+   of the usual border-goes-gold hover every other button has. */
+.icon-button {
+  display: inline-flex; align-items: center; justify-content: center;
+  background: none; border: none; padding: 6px; border-radius: 6px;
+  color: var(--accent); cursor: pointer; line-height: 0; flex-shrink: 0;
+}
+.icon-button:hover { background: rgba(190, 185, 87, 0.15); border-color: transparent; }
 
 /* ---------- Messages (a coloured line on the left, no box) ---------- */
 
