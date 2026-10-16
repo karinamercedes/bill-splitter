@@ -126,7 +126,10 @@ button {
   background: transparent;
   color: var(--text);
 }
-button:hover { border-color: var(--accent); }
+/* Empty/outline buttons (Remove, an unselected chip) already sit on the
+   transparent background; on hover the border and the text both pick up
+   the accent colour, rather than just the border as before. */
+button:hover { border-color: var(--accent); color: var(--accent); }
 button:disabled { opacity: 0.45; cursor: not-allowed; }
 
 /* Main action button — "Add" (a person) and "Add item", the two places
@@ -134,14 +137,20 @@ button:disabled { opacity: 0.45; cursor: not-allowed; }
    toggle or a destructive "Remove". Same accent-filled treatment as
    packing-list's plan-controls CTA, just available as its own class
    since these buttons sit inline in a form rather than alone in that
-   row. */
+   row. On hover it inverts to match the outline buttons above: the
+   solid fill drops out to the page's own background, leaving an
+   accent-coloured stroke and label instead of just brightening. */
 button.primary {
   background: var(--accent);
   border-color: var(--accent);
   color: var(--accent-text);
   font-weight: 700;
 }
-button.primary:hover { filter: brightness(1.08); }
+button.primary:hover {
+  background: transparent;
+  border-color: var(--accent);
+  color: var(--accent);
+}
 
 /* "Shared by" chips: a grid rather than a wrapped flex row, so names
    fill the full line and divide it evenly between however many there
@@ -163,6 +172,11 @@ button.primary:hover { filter: brightness(1.08); }
   color: var(--accent-text);
   font-weight: 600;
 }
+/* A selected chip keeps its solid fill and dark label on hover — the
+   generic button:hover above would otherwise turn its text the same
+   accent colour as its own already-accent background, making it
+   unreadable. */
+.chip-on:hover { color: var(--accent-text); }
 
 /* A CTA that should take the full width of its container (the "Add item"
    submit button sits below the full-width chips grid above). */

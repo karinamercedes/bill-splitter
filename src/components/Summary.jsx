@@ -3,7 +3,7 @@ export default function Summary({ result }) {
 
   return (
     <section className="section">
-      <h2><span className="accent-word">Who</span> owes <span className="accent-word">what</span></h2>
+      <h2>Who <span className="accent-word">owes</span> what</h2>
       <ul className="summary-list">
         {result.perPerson.map((p) => (
           <li key={p.id}>
