@@ -23,7 +23,7 @@ The usual bill-splitting problem isn't the maths, it's that everyone had somethi
 React + Vite. No backend, no paid services, nothing external except Google Fonts.
 
 ## Run it locally
-
+ 
 ```bash
 npm install
 npm run dev
