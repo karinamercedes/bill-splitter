@@ -2,8 +2,8 @@
 
 A free, no-signup tool for splitting a shared bill between friends, item by item -- built for exactly the "who owes what" conversation that comes up at the end of every group trip.
 
-**Live demo:** _add your Vercel link here once deployed_
-**Repo:** _add your GitHub link here_
+**Live demo:** https://bill-splitter-theta-nine.vercel.app/
+**Repo:** https://github.com/karinamercedes/bill-splitter
 
 ## Why this exists
 
