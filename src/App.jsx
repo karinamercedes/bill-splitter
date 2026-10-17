@@ -1,5 +1,6 @@
 import { useMemo } from 'react'
 import useLocalStorage from './hooks/useLocalStorage'
+import useScrollToHash from './hooks/useScrollToHash'
 import PeopleForm from './components/PeopleForm'
 import ItemForm from './components/ItemForm'
 import ItemsList from './components/ItemsList'
@@ -8,6 +9,7 @@ import Summary from './components/Summary'
 import { calculateSplit } from './utils/split'
 
 export default function App() {
+  useScrollToHash()
   const [people, setPeople] = useLocalStorage('bs-people', [])
   const [items, setItems] = useLocalStorage('bs-items', [])
   const [taxTip, setTaxTip] = useLocalStorage('bs-taxtip', { percent: '', fixed: '' })
