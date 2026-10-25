@@ -94,6 +94,7 @@ export default function ItemForm({ people, onAdd }) {
           {Number(item.price) > 0 && (
             <p className={`muted ${customTotal.toFixed(2) !== Number(item.price).toFixed(2) ? 'warn' : ''}`}>
               Entered so far: £{customTotal.toFixed(2)} of £{Number(item.price).toFixed(2)}
+              {' '}&middot; Left to enter: £{(Number(item.price) - customTotal).toFixed(2)}
             </p>
           )}
         </>

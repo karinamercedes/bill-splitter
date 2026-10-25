@@ -17,7 +17,7 @@ export default function Summary({ result }) {
         <strong><span className="accent-word">Total</span> £{result.billTotal}</strong>
       </div>
       {!result.reconciled && (
-        <p className="error" role="alert">Something doesn't add up -- please check the amounts entered.</p>
+        <p className="error" role="alert">Something doesn't add up - please check the amounts entered.</p>
       )}
     </section>
   )
